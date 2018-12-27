@@ -1,4 +1,4 @@
-const [filter, map, filter_imperative, map_imperative] = require('./chapter01');
+const [filter, map, filter_imperative, map_imperative] = require('../book_examples');
 
 const users = [
   { name: 'TN', age: 76 },
