@@ -195,6 +195,28 @@ const run3 = () => {
 
   _.not = v => !v;
   _.beq = a => b => a === b;
+
+  // 로직 개선 positive / negative 함수를 만들 수 있다.
+  const positive = iter => _.find(iter, _.identity);
+  const negativeIndex = iter => _.findIndex(iter, _.not);
+  // 다음과 같이 리펙토링이 가능하다
+  _.some = iter => _.not(_.not(positive(iter)));
+  _.every = iter => _.beq(-1)(negativeIndex(iter));
+
+  console.log(_.every([1]));
+
+  // compose 함수를 통해서 함수를 우측에서 좌측으로 합성해 갈 수 있다.
+  // 하단 코드는 화살표 함수로 작성된 함수의 this, apply, call 을 반영 할 수 없어서 사용하기가 힘들다. es5 under 에서 가능
+  // _.compose = (...args) => {
+  //   const start = args.length - 1;
+  //   return function() {
+  //     console.log(args);
+  //     let i = start;
+  //     let res = args[start].apply(this, args);
+  //     while (i--) res = args[i].call(this, res);
+  //     return res;
+  //   };
+  // };
 };
 
 function main() {
